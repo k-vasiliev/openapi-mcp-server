@@ -29,5 +29,9 @@ RUN npm run build
 # Открытие порта для MCP сервера
 EXPOSE 3000
 
+# Добавление переменной окружения для заголовков аутентификации API
+# Значение токена нужно заменить на реальный токен доступа Todoist
+ENV OPENAPI_MCP_HEADERS='{"Authorization":"Bearer YOUR_TODOIST_API_TOKEN"}'
+
 # Запуск сервера с вашей спецификацией Todoist API
 CMD ["npm", "start"]
