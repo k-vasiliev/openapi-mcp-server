@@ -4,5 +4,4 @@ buildCommand = "npm install && npm install @esbuild/linux-x64 --no-save && npm r
 
 [deploy]
 startCommand = "npm start"
-healthcheckPath = "/"
-healthcheckTimeout = 100
+healthcheck = false
