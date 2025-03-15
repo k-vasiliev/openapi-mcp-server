@@ -9,8 +9,8 @@ WORKDIR /app
 # Копирование package.json и pnpm-lock файлов
 COPY package.json pnpm-lock.yaml* ./
 
-# Установка зависимостей, включая опциональные
-RUN pnpm install --include-optional
+# Установка всех зависимостей используя npm вместо pnpm для решения проблемы с esbuild
+RUN npm install
 
 # Копирование исходного кода приложения
 COPY . .
@@ -22,10 +22,10 @@ RUN mkdir -p /app/openapi
 COPY todoist.yaml /app/openapi/todoist.yaml
 
 # Сборка приложения
-RUN pnpm build
+RUN npm run build
 
 # Открытие порта для MCP сервера
 EXPOSE 3000
 
 # Запуск сервера с вашей спецификацией Todoist API
-CMD ["pnpm", "start"]
+CMD ["npm", "start"]
