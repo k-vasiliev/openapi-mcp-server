@@ -28,4 +28,4 @@ RUN pnpm build
 EXPOSE 3000
 
 # Запуск сервера с вашей спецификацией Todoist API
-ENTRYPOINT ["npx", "openapi-mcp-server", "/app/openapi/todoist.yaml"]
+CMD ["pnpm", "start"]

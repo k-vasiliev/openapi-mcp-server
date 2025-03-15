@@ -14,7 +14,8 @@
     "test:dev": "vitest watch",
     "build": "tsc -build && node scripts/build-cli.js",
     "dev": "tsx watch scripts/start-proxy.ts",
-    "parse-openapi": "tsx scripts/parse-openapi.ts"
+    "parse-openapi": "tsx scripts/parse-openapi.ts",
+    "start": "node bin/cli.mjs ./openapi/todoist.yaml"
   },
   "bin": {
     "openapi-mcp-server": "bin/cli.mjs"
