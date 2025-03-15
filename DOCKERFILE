@@ -3,15 +3,19 @@ FROM node:18-alpine
 # Создание рабочей директории
 WORKDIR /app
 
-# Копирование package.json
+# Копирование только package.json (без pnpm-lock)
 COPY package.json ./
+
+# Удаление файла блокировки pnpm если он существует
+RUN rm -f pnpm-lock.yaml || true
 
 # Установка зависимостей с явной установкой платформенного esbuild
 RUN npm install && \
     npm install @esbuild/linux-x64 --no-save
 
-# Копирование исходного кода приложения
+# Копирование исходного кода приложения (исключая pnpm файлы)
 COPY . .
+RUN rm -f pnpm-lock.yaml || true
 
 # Создание директории для OpenAPI спецификации
 RUN mkdir -p /app/openapi
