@@ -9,8 +9,8 @@ WORKDIR /app
 # Копирование package.json и pnpm-lock файлов
 COPY package.json pnpm-lock.yaml* ./
 
-# Установка зависимостей
-RUN pnpm install
+# Установка зависимостей, включая опциональные
+RUN pnpm install --include-optional
 
 # Копирование исходного кода приложения
 COPY . .
