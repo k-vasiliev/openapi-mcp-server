@@ -1,0 +1,14 @@
+[phases.setup]
+packageManager = "npm"
+
+[phases.install]
+cmds = ["npm install", "npm install @esbuild/linux-x64@0.24.2 --no-save"]
+
+[phases.build]
+cmds = ["npm run build"]
+
+[start]
+cmd = "npm start"
+
+[env]
+PORT = "3000"
