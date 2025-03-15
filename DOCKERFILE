@@ -1,15 +1,12 @@
 FROM node:18-alpine
 
-# Установка pnpm
-RUN npm install -g pnpm
-
 # Создание рабочей директории
 WORKDIR /app
 
 # Копирование package.json и pnpm-lock файлов
 COPY package.json pnpm-lock.yaml* ./
 
-# Установка всех зависимостей используя npm вместо pnpm для решения проблемы с esbuild
+# Установка всех зависимостей используя npm для решения проблемы с esbuild
 RUN npm install
 
 # Копирование исходного кода приложения
