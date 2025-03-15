@@ -1,0 +1,31 @@
+FROM node:18-alpine
+
+# Установка pnpm
+RUN npm install -g pnpm
+
+# Создание рабочей директории
+WORKDIR /app
+
+# Копирование package.json и pnpm-lock файлов
+COPY package.json pnpm-lock.yaml* ./
+
+# Установка зависимостей
+RUN pnpm install
+
+# Копирование исходного кода приложения
+COPY . .
+
+# Создание директории для OpenAPI спецификации
+RUN mkdir -p /app/openapi
+
+# Копирование файла todoist.yaml в директорию внутри контейнера
+COPY todoist.yaml /app/openapi/todoist.yaml
+
+# Сборка приложения
+RUN pnpm build
+
+# Открытие порта для MCP сервера
+EXPOSE 3000
+
+# Запуск сервера с вашей спецификацией Todoist API
+ENTRYPOINT ["npx", "openapi-mcp-server", "/app/openapi/todoist.yaml"]
